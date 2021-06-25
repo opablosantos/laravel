@@ -14,7 +14,8 @@ class Post {
     public $body;
     public $slug;
 
-    public function __construct($title, $excerpt, $date, $body, $slug) {
+    public function __construct($title, $excerpt, $date, $body, $slug)
+    {
         $this->title = $title;
         $this->excerpt = $excerpt;
         $this->date = $date;
@@ -22,26 +23,26 @@ class Post {
         $this->slug = $slug;
     }
 
-    public static function all() {
-        return collect(File::files(resource_path("posts")))
-        ->map(function($file) {
-            return YamlFrontMatter::parseFile($file);
-        })
-        ->map(function($document) {
-            return new Post(
-                $document->title,
-                $document->excerpt,
-                $document->date,
-                $document->body(),
-                $document->slug
-            );
-        });
+    public static function all()
+    {
+        return collect(File::files(resource_path("posts/")))
+            ->map(function($file) {
+                return YamlFrontMatter::parseFile($file);
+            })
+            ->map(function($document) {
+                return new Post(
+                    $document->title,
+                    $document->excerpt,
+                    $document->date,
+                    $document->body(),
+                    $document->slug
+                );
+            });
     }
 
-    public static function find($slug) {
-
-       static::all()->firstWhere('slug', $slug);
-
+    public static function find($slug)
+    {
+        return static::all()->firstWhere('slug', $slug);
     }
 
 }
