@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="/app.css">
-</head>
-<body>
+<x-layout>
     @foreach ($posts as $post)
-        <article>
-            <h1>
-                <a href="/posts/{!! $post->slug !!}">
-                    {!! $post->title !!}
-                </a>
-            </h1>
+    <article>
+        <h1>
+            <a href="/posts/{!! $post->slug !!}">
+                {!! $post->title !!}
+            </a>
+        </h1>
 
-            <div>
-                {!! $post->excerpt !!}
-            </div>
-        </article>
+        <div>
+            {!! $post->excerpt !!}
+        </div>
+    </article>
     @endforeach
-</body>
-</html>
+</x-layout>
